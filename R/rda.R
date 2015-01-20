@@ -22,8 +22,8 @@
 # conflict90s 
 # comtrade 
 # yeast 
-
-
+# lazegalaw
+# sampsonmonks
 
 
 #' @title Null distribution plot
@@ -534,12 +534,21 @@ el2sm<-function(el,directed=TRUE,nadiag=all(el[,1]!=el[,2]))
   w<-rep(1,nrow(el)) 
   if(ncol(el)>2){ w<-el[,3] } 
 
+  if( is.numeric(el) && all(round(el[,1:2])==el[,1:2])  ) { nodes<-1:max(el) } 
+  if(!(is.numeric(el) && all(round(el[,1:2])==el[,1:2]))) 
+  { 
+    nodes<-sort(unique(c(el[,1:2]))) 
+  }
+
+  el<-cbind( match(el[,1],nodes) ,  match(el[,2],nodes) ) 
+
   n<-max(el[,1:2]) 
-  sm <- matrix(0,n,n)       # construct sociomatrix 
+  sm <- matrix(0,n,n)            # construct sociomatrix 
   sm[el[,1:2]]<-w                # fill in 
   if(nadiag) { diag(sm) <- NA  } # set diagonal to NA 
-  if(!directed){ sm<-sm+t(sm) }
-  sm
+  if(!directed){ sm<-sm+t(sm) } 
+  dimnames(sm)[[1]]<-dimnames(sm)[[2]]<-nodes 
+  sm 
 }
 
 
@@ -634,9 +643,9 @@ NULL
 #' students in community 3 of the AddHealth study. 
 #' \itemize{
 #' \item E: An edge list in which the value of the edge corresponds to an ad-hoc measure of intensity of the relation. Note that students were only allowed to nominate up to 5 male friends and 5 female friends. 
-#' \item X: Matrix of students attributes, including sex, race (1=white, 2=black,3=hispanic, 4=asian, 5=mixed/other) and grade. 
+#' \item X: Matrix of students attributes, including sex, race (1=white, 2=black, 3=hispanic, 4=asian, 5=mixed/other) and grade. 
 #' } 
-#' See \url{http://http://moreno.ss.uci.edu/data.html#adhealth} for more details. 
+#' See \url{http://moreno.ss.uci.edu/data.html#adhealth} for more details. 
 #' @docType data
 #' @keywords datasets
 #' @format list 
@@ -650,9 +659,9 @@ NULL
 #' students in community 9 of the AddHealth study. 
 #' \itemize{
 #' \item E: An edge list in which the value of the edge corresponds to an ad-hoc measure of intensity of the relation. Note that students were only allowed to nominate up to 5 male friends and 5 female friends. 
-#' \item X: Matrix of students attributes, including sex, race (1=white, 2=black,3=hispanic, 4=asian, 5=mixed/other) and grade. 
+#' \item X: Matrix of students attributes, including sex, race (1=white, 2=black, 3=hispanic, 4=asian, 5=mixed/other) and grade. 
 #' } 
-#' See \url{http://http://moreno.ss.uci.edu/data.html#adhealth} for more details.
+#' See \url{http://moreno.ss.uci.edu/data.html#adhealth} for more details.
 #' @docType data
 #' @keywords datasets
 #' @format list 
@@ -680,16 +689,18 @@ NULL
 #' A network of protein-protein interactions (bindings) from 
 #' Butland et al (2005) ``Interaction network containing conserved
 #'     and essential protein complexes in Escherichia coli''. 
-#' 
+#' Obtained from 
+#' \url{http://pil.phys.uniroma1.it/~gcalda/cosinsite/extra/data/proteins/}. 
+#'
 #' @name butland_ppi
 #' @docType data
 #' @usage data(butland_ppi)
-#' @format A binary, symmetric matrix
+#' @format An edgelist for a directed, binary relation 
 #' @keywords datasets
 #' @examples
 #' 
 #' data(butland_ppi)
-#' gofstats(butland_ppi)
+#' gofstats(el2sm(butland_ppi))
 #' 
 #' 
 NULL
@@ -740,6 +751,52 @@ NULL
 #' \url{http://interactome.dfci.harvard.edu/S_cerevisiae/download/Ito_core.txt}
 #' 
 #' @name yeast
+NULL
+
+#' @title Lazega's law firm data
+#'
+#' @description 
+#' Several nodal and dyadic variables measured on 71 attorneys in a law firm. 
+#'
+#' @format 
+#' A list consisting of a socioarray \code{Y} and a nodal attribute matrix \code{X}. 
+#' 
+#' The dyadic variables in \code{Y} include three binary networks: advice, friendship
+#' and co-worker status. 
+#' 
+#' The categorical nodal attributes in \code{X} are coded as follows: 
+#' \itemize{
+#' \item status (1=partner, 2=associate)
+#' \item office (1=Boston, 2=Hartford, 3=Providence) 
+#' \item practice (1=litigation, 2=corporate) 
+#' \item law school (1=Harvard or Yale, 2=UConn, 3=other)  
+#'  }
+#' \code{seniority} and \code{age} are given in years, and \code{female} is 
+#' a binary indicator. 
+#' 
+#' @source 
+#' \url{http://moreno.ss.uci.edu/data.html#lazega}
+#' 
+#' @name lazegalaw
+NULL
+
+#' @title Sampson's monastery data
+#'
+#' @description 
+#' Several dyadic variables measured on 18 members of a monastery. 
+#'
+#' @format 
+#' A socioarray whose dimensions represent nominators, nominatees and relations. 
+#' Each monk was asked to rank up to three other monks on a variety of positive 
+#' and negative relations. A rank of three indicates the "highest" ranking for 
+#' a particular relational variable. The relations \code{like_m2} and \code{like_m1}
+#' are evaluations of likeing at one and two timepoints previous to when the 
+#' other relations were measured. 
+#' 
+#' @source 
+#' \url{http://moreno.ss.uci.edu/data.html#sampson}
+#' 
+#' @name sampsonmonks
 NULL
 
 
