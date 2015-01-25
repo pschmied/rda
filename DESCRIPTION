@@ -1,10 +1,10 @@
 Package: rda
 Title: Relational Data Analysis
-Version: 0.2
+Version: 0.3
 Description: Functions for analysis of relational and network data
 Depends: R (>= 3.1.2)
 License: GPL-3
 LazyData: true
 Author: Peter Hoff
 Maintainer: Peter Hoff <pdhoff@uw.edu>
-Packaged: 2015-01-19 22:54:54 UTC; hoff
+Packaged: 2015-01-23 17:23:09 UTC; hoff

@@ -24,7 +24,8 @@
 # yeast 
 # lazegalaw
 # sampsonmonks
-
+# coldward
+# casia
 
 #' @title Null distribution plot
 #' 
@@ -485,7 +486,7 @@ netplot<-function(Y,X=NULL,xaxt="n",yaxt="n",xlab="",ylab="",
 #' 
 #' Add lines to a network plot
 #' 
-#' @usage addlines(Y,X,col="green",alength=0,...)
+#' @usage addlines(Y,X,col="lightblue",alength=0,...)
 #' @param Y a sociomatrix 
 #' @param X coordinates of nodes
 #' @param col color of lines. Can be a vector of length equal to the number of edges to be drawn
@@ -501,7 +502,7 @@ netplot<-function(Y,X=NULL,xaxt="n",yaxt="n",xlab="",ylab="",
 #' addlines(Y,X,col=Y[Y!=0]) 
 #' 
 #' @export addlines
-addlines<-function(Y,X,col="green",alength=0,...)
+addlines<-function(Y,X,col="lightblue",alength=0,...)
 {
   # add links between nodes of a sociomatrix 
   links<-which(Y!=0,arr.ind=TRUE)
@@ -797,6 +798,62 @@ NULL
 #' \url{http://moreno.ss.uci.edu/data.html#sampson}
 #' 
 #' @name sampsonmonks
+NULL
+
+#' @title Read's highland tribe data
+#'
+#' @description 
+#' Positive and negative relations between 16 New Guinean tribes. 
+#'
+#' @format 
+#' A sixteen by sixteen by 2 socioarray
+#' 
+#' @source 
+#' \url{http://http://vlado.fmf.uni-lj.si/pub/networks/data/ucinet/ucidata.htm#gama}
+#' 
+#' @name tribes
+NULL
+
+#' @title Cold War data
+#'
+#' @description 
+#' Positive and negative relations between countries during the cold war
+#'
+#' @format 
+#' A list including the following dyadic and nodal variables:
+#' \itemize{
+#' \item \code{cc}: a socioarray of ordinal levels of military 
+#' cooperation (positive) and conflict (negative), every 5 years; 
+#' \item \code{distance}: between-country distance; 
+#' \item \code{gdp}: country gdp every 5 years; 
+#' \item \code{polity}: country polity every 5 years.  
+#' }
+#' @source 
+#' Xun Cao : \url{http://polisci.la.psu.edu/people/xuc11}
+#' 
+#' @name coldwar
+NULL
+
+
+
+#' @title Central Asia Cooperation
+#'
+#' @description 
+#' Counts of between-country military cooperation in Central Asia 
+#'
+#' @format 
+#' A list including the following dyadic and nodal variables:
+#' \itemize{
+#' \item \code{coop}: a sociomatrix of counts of cooperative events; 
+#' \item \code{dist}: between-country distance; 
+#' \item \code{pop}: country population; 
+#' }
+#' @source 
+#' Originally from the KEDS project, see 
+#' P.D. Hoff (2005) "Bilinear mixed-effects models for dyadic data" for 
+#' details. 
+#' 
+#' @name casia
 NULL
 
 
