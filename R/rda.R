@@ -24,8 +24,9 @@
 # yeast 
 # lazegalaw
 # sampsonmonks
-# coldward
+# coldwar
 # casia
+# gfriends
 
 #' @title Null distribution plot
 #' 
@@ -856,6 +857,20 @@ NULL
 #' @name casia
 NULL
 
+#' @title Girls high school friendship data
+#'
+#' @description 
+#' Directed inditicaor of friendship between 144 high school girls 
+#'
+#' @format 
+#' A list including the following dyadic and nodal variables:
+#' \itemize{
+#' \item \code{Y}: an undirected sociomatrix of friendship ties;
+#' \item \code{X}: nodal covariates including grade and normalized gpa and smoking scores
+#' }
+#' 
+#' @name gfriends
+NULL
 
 
 
